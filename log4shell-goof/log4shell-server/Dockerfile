@@ -2,7 +2,7 @@ FROM maven:3-jdk-8-slim as build
 COPY . .
 RUN --mount=target=$HOME/.m2,type=cache mvn clean compile assembly:single
 
-FROM openjdk:8 as ldap
+FROM openjdk:13.0.1 as ldap
 COPY --from=build target/*.jar /server.jar
 EXPOSE 8000
 EXPOSE 9999
